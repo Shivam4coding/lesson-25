@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Birthday Countdown Checker</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff6b6b, #ffb347);
+            text-align: center;
+            padding: 40px;
+            color: white;
+        }
+
+        .container {
+            width: 450px;
+            margin: auto;
+            background: white;
+            color: black;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #ff4d6d;
+        }
+
+        input {
+            padding: 10px;
+            width: 200px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #e63956;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🎂 My Birthday Countdown Checker 🎂</h1>
+
+        <p>Select Your Birthday</p>
+
+        <input type="date" id="birthday">
+
+        <br><br>
+
+        <button onclick="checkBirthday()">Check Countdown</button>
+
+        <div id="result"></div>
+
+    </div>
+
+    <script>
+
+        function checkBirthday() {
+
+            let birthdayInput = document.getElementById("birthday").value;
+
+            if (birthdayInput === "") {
+                document.getElementById("result").innerHTML =
+                    "⚠ Please select your birthday!";
+                return;
+            }
+
+            let birthDate = new Date(birthdayInput);
+            let today = new Date();
+
+            let nextBirthday = new Date(
+                today.getFullYear(),
+                birthDate.getMonth(),
+                birthDate.getDate()
+            );
+
+            if (nextBirthday < today) {
+                nextBirthday.setFullYear(today.getFullYear() + 1);
+            }
+
+            let difference = nextBirthday - today;
+
+            let daysLeft = Math.ceil(
+                difference / (1000 * 60 * 60 * 24)
+            );
+
+            let messages = [
+                "🎁 A surprise is waiting for you!",
+                "🎉 Get ready for cake and gifts!",
+                "🥳 Your special day is coming soon!",
+                "🎂 Start your birthday countdown today!",
+                "✨ Happiness is on the way!"
+            ];
+
+            let randomMessage =
+                messages[Math.floor(Math.random() * messages.length)];
+
+            let stars = "";
+
+            for (let i = 1; i <= 5; i++) {
+                stars += "⭐ ";
+            }
+
+            if (daysLeft === 0) {
+
+                document.getElementById("result").innerHTML =
+                    "🥳 HAPPY BIRTHDAY! 🎂<br>Have a fantastic day!";
+
+            }
+            else {
+
+                document.getElementById("result").innerHTML =
+                    "🎂 <b>" + daysLeft + "</b> days left until your birthday!<br><br>" +
+                    randomMessage + "<br><br>" +
+                    stars + "<br><br>" +
+                    "📅 Countdown Review: Your birthday is getting closer every day!";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
